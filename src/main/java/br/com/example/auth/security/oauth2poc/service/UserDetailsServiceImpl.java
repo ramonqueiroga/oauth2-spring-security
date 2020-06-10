@@ -26,8 +26,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         br.com.example.auth.security.oauth2poc.domain.User user = this.userRepository.findByUsername(username);
-        List<String> roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toList());
-        List<SimpleGrantedAuthority> grantedAuthorities = roles.stream()
+        List<SimpleGrantedAuthority> grantedAuthorities = user.getRoles().stream()
+                .map(Role::getName)
                 .map(s -> ROLE + s)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
