@@ -31,6 +31,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .map(s -> ROLE + s)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-        return new User(user.getUsername(), "{bcrypt}$2a$10$yXmeUSpWCA.X9snxXS6C2eR8nrvIkaXqSJRINq0R1rFi7IqrgRhg.", grantedAuthorities);
+        return new User(user.getUsername(), "{bcrypt}$2a$10$yXmeUSpWCA.X9snxXS6C2eR8nrvIkaXqSJRINq0R1rFi7IqrgRhg.", true, true, true, true, grantedAuthorities);
     }
 }

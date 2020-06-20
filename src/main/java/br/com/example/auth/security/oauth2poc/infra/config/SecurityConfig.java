@@ -18,8 +18,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @EnableWebSecurity
 @EnableResourceServer
-@EnableAuthorizationServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -46,9 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests().anyRequest().authenticated()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/customers**").hasRole("ADMIN")
+                .antMatchers("/home").permitAll()
+                .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
