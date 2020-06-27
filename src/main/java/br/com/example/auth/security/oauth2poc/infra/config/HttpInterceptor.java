@@ -16,7 +16,6 @@ public class HttpInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.addHeader("TESTE", "TESTE");
         LOG.info("Interceptor logging only for testing propose");
         return true;
     }
